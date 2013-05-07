@@ -1,3 +1,3 @@
 require_relative "Spider"
 
-puts Spider.new().go("http://www.rubyist.net/~slagell/ruby/modules.html")
+Spider.new().go("http://matt1618.freeyellow.com/deut.html")
