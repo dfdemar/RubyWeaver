@@ -6,30 +6,29 @@ class Spider
   end
   
   def go(url)
-    fetch_new_page(url)
+    source = fetch_new_page(url)
+    crawl(source)
+    load_next_url()
   end
   
   private
   
   def fetch_new_page(url)
     puts "Loading #{url}"
-    source = NetworkConnection.connect(url)
-    crawl(source)
+    NetworkConnection.connect(url)
   end
   
   def crawl(source)
-    links = source.scan(/(href|src)="(http.+?)"/)
+    links = source.scan(/href="(http.+?)"/)
     links.each do |link|
-      @url_queue.push(link[1])
-      puts "- #{link[1]}"
+      @url_queue.push(link[0])
+      puts "Link found - #{link[0]}"
     end
-    
-    load_next_url()
   end
   
   def load_next_url()
     while @url_queue.any? do
-      fetch_new_page(@url_queue.shift)
+      go(@url_queue.shift)
     end
   end
 end
