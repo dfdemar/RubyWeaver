@@ -1,28 +1,48 @@
 require_relative "NetworkConnection"
+require_relative "SpiderController"
 
 class Spider
   def initialize()
+    @controller = SpiderController.new()
     @url_queue = []
+    @urls_seen = []
   end
   
   def go(url)
-    source = fetch_new_page(url)
-    crawl(source)
-    load_next_url()
+    @urls_seen.push(url)
+    process(url)
   end
-  
+
   private
   
+  def process(url)
+    source = fetch_new_page(url)
+    if !source.empty? or !source.nil?
+      crawl(source)
+    end
+    load_next_url()
+  end
+
   def fetch_new_page(url)
     puts "Loading #{url}"
-    NetworkConnection.connect(url)
+    source = NetworkConnection.connect(url)
   end
   
   def crawl(source)
     links = source.scan(/href="(http.+?)"/)
     links.each do |link|
-      @url_queue.push(link[0])
       puts "Link found - #{link[0]}"
+      handle_URL(link[0])
+    end
+  end
+  
+  def handle_URL(url)
+    if @urls_seen.include?(url)
+      puts "Skipping this URL - #{url}"
+    else
+      @url_queue.push(url)
+      @urls_seen.push(url)
+      puts "Queuing - #{url}"
     end
   end
   

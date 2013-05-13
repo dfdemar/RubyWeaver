@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration [
+  <!ELEMENT configuration ANY>
+  <!ELEMENT setting ANY>
+  <!ATTLIST setting id ID #REQUIRED>
+]>
+<configuration>
+  <setting id="MaximumDepth">4</setting>
+  <setting id="MaximumThreads">7</setting>
+  <setting id="UseLogging">True</setting>
+  <setting id="UseWhiteList">True</setting>
+  <setting id="MinThreadIdleTime">5000</setting>
+  <setting id="MaxThreadIdleTime">10000</setting>
+  <setting id="DownloadFolder">C:\Temp\Spider\</setting>
+  <setting id="FileTypesToDownload">.jpg|.jpeg|.png</setting>
+  <setting id="ExcludedFileTypes">.asx|.css|.doc|.docx|.exe|.ico|.flv|.gif|.mid|.mov|.mp3|.ogg|.pdf|.ppt|.swf|.torrent|.txt|.wav|.wma|.wmv|.xls|.xlsx|.xml|.zip|.mov</setting>
+  <setting id="ExcludedDomains">
+    google.com
+    facebook.com
+    wikipedia.org
+    yahoo.com
+    twitter.com
+    creativecommons.org
+    pinterest.com
+    reddit.com
+    vimeo.com
+    youtube.com
+    microsoft.com
+    apple.com
+    cnn.com
+    goodreads.com
+    stackoverflow.com
+    thepiratebay.sx
+    amazon.com
+  </setting>
+  <setting id="WhiteListedDomains">
+    bordel.haghn.com
+    isfdb.org
+  </setting>
+  <setting id="SeedURLs">
+    http://www.isfdb.org/cgi-bin/ea.cgi?21349
+  </setting>
+</configuration>
